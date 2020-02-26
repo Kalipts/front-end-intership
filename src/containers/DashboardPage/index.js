@@ -1,14 +1,23 @@
-import React from "react";
-import ToolbarCalendar from "./ToolbarCalendar";
-import Header from "../../components/Header";
-import TableCalendar from "../../components/TableCalendar";
+import React from 'react';
+import moment from 'moment';
 
-export default function DashboardPage() {
+import ToolbarCalendar from './ToolbarCalendar';
+import TableCalendar from './TableCalendar';
+import { CalendarProvider } from '../../context/Calendar';
+
+function DashboardPage() {
   return (
     <div>
-      <Header/>
       <ToolbarCalendar />
-      <TableCalendar/>
+      <CalendarProvider>
+        <TableCalendar
+          endDay={moment('2020-02-03', 'YYYY-MM-DD')}
+          startDay={moment('2019-12-30', 'YYYY-MM-DD')}
+        />
+      </CalendarProvider>
+     
     </div>
   );
 }
+
+export default DashboardPage;

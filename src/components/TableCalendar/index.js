@@ -1,34 +1,43 @@
-import React from 'react';
-import './index.css';
-import moment from 'moment';
-import BookingCard from './BookingCard';
-import BookingText from './BookingContent';
-import BookingTime from './BookingTime';
-import { FaFileExcel } from 'react-icons/fa';
+import React from "react";
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import "./index.css";
+import moment from "moment";
+=======
+import ReactDOM from "react-dom";
+=======
+>>>>>>> 08e5284... Refactor Header and add common directory
+=======
+>>>>>>> 2cdbc787d54ed7f4e17c3fec34aca8c61d1e7a6d
+import "./index.css";
+import moment from "moment";
+import BookingCard from "./BookingCard";
+import BookingContent from "./BookingContent";
+import BookingTime from "./BookingTime";
+import Sidebar from "../../containers/DashboardPage/ResourceBar/Sidebar";
+<<<<<<< HEAD
+>>>>>>> 2a772b1... Fix person sidebar and Structure Redux, Call API for resource
+=======
+>>>>>>> 2cdbc787d54ed7f4e17c3fec34aca8c61d1e7a6d
 
-const Booking = {
-  startDay: moment('2020-01-01'),
-  details: 'ABC',
-  endDay: moment('2020-03-01')
-};
 class TableCalendar extends React.Component {
   state = {
     dateContext: moment(),
-    today: moment(),
-    testDates: new Array(53)
+    today: moment()
   };
 
   weekdaysShort = moment.weekdaysShort();
   year = () => {
-    return this.state.dateContext.format('Y');
+    return this.state.dateContext.format("Y");
   };
 
   month = () => {
-    return this.state.dateContext.format('MMMM');
+    return this.state.dateContext.format("MMMM");
   };
 
   monthNumber = () => {
-    return this.state.dateContext.format('M');
+    return this.state.dateContext.format("M");
   };
 
   getDateOfISOWeek(w, y) {
@@ -39,53 +48,56 @@ class TableCalendar extends React.Component {
     else ISOWeekStart.setDate(simple.getDate() + 8 - simple.getDay());
     return ISOWeekStart;
   }
-  debugger;
+
   render() {
+    // define
+
+    console.log(this.weekdaysShort[1 % 7]);
+
+    let week_dates = [];
     let grid_contain = [];
-    let numberOfWeek = new Array(53).fill(1);
-    let weekDates = numberOfWeek.map((testDate, i) => {
-      console.log('Da chay');
+    for (let i = 1; i <= 53; i++) {
       let week;
-      let days;
-      days = new Array(7).fill(1).map((day, index) => {
-        day = moment(this.getDateOfISOWeek(i, 2020))
-          .add(index, 'days')
-          .format('D');
+      let days = [];
+      for (let j = 0; j <= 6; j++) {
+        let day = moment(this.getDateOfISOWeek(i, 2020))
+          .add(j, "days")
+          .format("D");
         let date = moment(this.getDateOfISOWeek(i, 2020))
-          .add(index, 'days')
-          .format('MM/DD/YYYY');
-        let month = moment(date).format('M');
-        let d = this.weekdaysShort[(index + 1) % 7];
-        let classOfDay = 'day0 day ' + d.toLowerCase();
-        return (
-          <div key={day + '' + i} className={classOfDay}>
-            <span className="day1"> {d} </span>
+          .add(j, "days")
+          .format("MM/DD/YYYY");
+
+        let month = moment(date).format("M");
+        console.log(" hello : ", month);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+        let completeDay = month + "-" + day + "-" + this.year();
+>>>>>>> 2a772b1... Fix person sidebar and Structure Redux, Call API for resource
+
+=======
+>>>>>>> 08e5284... Refactor Header and add common directory
+=======
+
+>>>>>>> 2cdbc787d54ed7f4e17c3fec34aca8c61d1e7a6d
+        let d = this.weekdaysShort[(j + 1) % 7];
+        let classOfDay = "day0 day " + d.toLowerCase();
+        days.push(
+          <div className={classOfDay}>
+            <span className="day1">{d}</span>
             <br />
-            <span> {day} </span>
+            <span>{day}</span>
           </div>
         );
-      });
+      }
       week = (
         <div className="y-2019">
-          <span className="top-week"> Week {i} </span>
+          <span className="top-week"> Week {i}</span>
         </div>
       );
-      const cellInCalendar = new Array(7 * 7).fill(1).map((item, index) => {
-        return (
-          <div
-            key={index}
-            style={{
-              verticalAlign: 'sub',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'flex-start'
-            }}
-          ></div>
-        );
-      });
-      grid_contain.push(<div className="item contain">{cellInCalendar}</div>);
-      return (
+      week_dates.push(
         <div className="item top">
           <div className="month">
             {week}
@@ -93,14 +105,94 @@ class TableCalendar extends React.Component {
           </div>
         </div>
       );
-    });
+
+      grid_contain.push(
+        <div className="item contain">
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <div></div>
+=======
+=======
+>>>>>>> 2cdbc787d54ed7f4e17c3fec34aca8c61d1e7a6d
+          <div>
+            {" "}
+            <BookingCard color={"green"} length={5}>
+              {" "}
+              <BookingContent>asd</BookingContent>
+              <BookingTime>4h</BookingTime>
+            </BookingCard>{" "}
+            <BookingCard color={"red"} length={4}>
+              {" "}
+              <BookingContent>asd</BookingContent>
+              <BookingTime>4h</BookingTime>
+            </BookingCard>{" "}
+            <BookingCard color={"blue"} length={3}>
+              {" "}
+              <BookingContent>asd</BookingContent>
+              <BookingTime>4h</BookingTime>
+            </BookingCard>
+          </div>
+<<<<<<< HEAD
+>>>>>>> 2a772b1... Fix person sidebar and Structure Redux, Call API for resource
+=======
+>>>>>>> 2cdbc787d54ed7f4e17c3fec34aca8c61d1e7a6d
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      );
+    }
+
     return (
       <div className="container">
-        <div className="item aside1 left"></div>
-        <div className="item aside2 left"></div>
-
+        <Sidebar />
         <div className="right">
-          <div className="grid-top  ">{weekDates}</div>
+          <div className="grid-top  ">{week_dates}</div>
           <div className="gird-contain ">{grid_contain}</div>
         </div>
       </div>
