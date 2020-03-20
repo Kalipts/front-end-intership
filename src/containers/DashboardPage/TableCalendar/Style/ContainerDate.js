@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { WIDTH_CELL_IN_TABLE_CALENDAR } from '../../../App/constant';
+
 const ContainerDate = styled.div`
-    overflow-x: hidden;
-    margin: 0px;
-    position: relative;
-    padding-bottom: 0px;
-    max-height: 360px;
-    width: ${props=> props.numberOfDay * WIDTH_CELL_IN_TABLE_CALENDAR +'px'};
-    position: relative;
-    z-index: 2;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  z-index: 10;
+  top: 0;
+  position: sticky;
+  background: #fff;
+  border-top: 1px solid ${props => props.theme.color.borderCellCalendar};
+  border-bottom: 1px solid ${props => props.theme.color.borderCellCalendar};
 `;
 export default ContainerDate;

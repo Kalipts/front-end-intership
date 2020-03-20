@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import Filter from "./Filter";
-import StyledSidebar from "./StyledSidebar";
-import { getResource } from "../../../api/resourceApi";
+import Filter from './Filter';
+import { getResource } from '../../../api/resourceApi';
 
 function Sidebar(props) {
   const [persons, setPersons] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
+  const { scrollTop } = props;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +17,8 @@ function Sidebar(props) {
       const personsFilter = result.map(resource => {
         const person = {
           _id: resource._id,
-          name: resource.name.first + " " + resource.name.last,
-          avatar: resource.avatar
+          name: `${resource.name.first} ${resource.name.last}`,
+          avatar: resource.avatar,
         };
         return person;
       });
@@ -27,13 +28,10 @@ function Sidebar(props) {
     fetchData();
   }, []);
 
-  return (
-    <>
-   
-      {isLoading && <div>Loading</div>}
-      {persons && <Filter content={persons} />}
-    </>
-  );
+  return <>{persons && <Filter scrollTop={scrollTop} content={persons} />}</>;
 }
+Sidebar.propTypes = {
+  scrollTop: PropTypes.number,
+};
 
 export default Sidebar;

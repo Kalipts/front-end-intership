@@ -1,22 +1,32 @@
-import { getData, updateData, deleteData, addData } from "./axiosService";
+import moment from 'moment';
+import { getData, updateData, deleteData, addData } from './axiosService';
+import { seperateDayByWeekend } from '../utils/Date';
 
-const url = `http://localhost:5000/api/booking`;
+const url = `${process.env.REACT_APP_API_URL}/api/booking`;
 
-console.log(url);
-export const getBooking = data => {
-  return getData(url, data);
+export const getBooking = (startDay, endDay) => {
+  const formatedStart = moment(startDay.toString()).format('YYYY-MM-DD');
+  const formatedEnd = moment(endDay.toString()).format('YYYY-MM-DD');
+
+  return getData(`${url}/${formatedStart}/${formatedEnd}`, {});
 };
 
-export const deleteBooking = data => {
-  const bookingId = data;
-  return deleteData({ url: `${url}/${bookingId}`, bookingId });
-};
+export const deleteBooking = bookingId =>
+  deleteData({ url: `${url}/${bookingId}`, bookingId });
 
-export const updateBooking = data => {
-  return updateData({ url: `${url}`, data });
-};
+export const updateBooking = booking =>
+  updateData({ url: `${url}/${booking._id}`, data: booking });
 
-export const addBooking = data => {
-  const bookingId = data;
-  return addData({ url: `${url}/${bookingId}`, bookingId });
+export const addBooking = newBooking => {
+  const bookings = seperateDayByWeekend(newBooking.startDay, newBooking.endDay);
+  try {
+    bookings.map(booking => {
+      addData(`${url}`, {
+        ...newBooking,
+        startDay: booking.startDay,
+        endDay: booking.endDay,
+      });
+      return booking;
+    });
+  } catch (error) {}
 };

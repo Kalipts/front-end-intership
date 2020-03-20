@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-import { WIDTH_RESOURCE_BAR } from '../../../App/constant';
-
-const DateBooking = styled.td`
-  overflow-x: scroll;
+const DateBooking = styled.div`
+  overflow-x: auto;
+  overflow-y: auto;
   white-space: nowrap;
-  max-width: ${props => props.width - WIDTH_RESOURCE_BAR + 'px'};
+  display: grid;
+  grid-template-rows: 72px auto;
+  height: inherit;
 `;
 export default DateBooking;
